@@ -16,7 +16,7 @@ function onsubmit(e)
   if(nameinput.value==='' || email.value==='')
   {
      msg.classList.add('error');                // Add class error in msg.
-     msg.innerHTML="Please Enter User details";
+     msg.innerHTML="Hey Taani can you please Enter User details";
 
      setTimeout(() => {                           // Remove the message with class after 1 sec.
       msg.classList.remove('error');
@@ -44,7 +44,7 @@ function onsubmit(e)
 
     // Give Success message
     msg.classList.add('success');                // Add class Success in msg.
-    msg.innerHTML="SuccessFully Added..";
+    msg.innerHTML="Hey, you SuccessFully Added..";
 
     setTimeout(() => {                           // Remove the message with class after 1 sec.
       msg.classList.remove('success');
