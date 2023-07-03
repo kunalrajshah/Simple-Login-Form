@@ -1,0 +1,89 @@
+body {
+  background-image: url('istockphoto-1141696681-170667a.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+.box
+{
+  height:350px;
+  border: 2px solid  orange;
+  width:60%;
+  background-color:rgba(255, 255, 255, -0.6);
+  border-radius: 8px;
+  padding-left:2%;
+}
+.main-box
+{
+  margin-left: 20%;
+  margin-top:8%;
+}
+div.box label {
+  font-weight: bold;
+  color: #000000;
+  margin-top: 40%;
+  font-size:17px;
+}
+
+#name,#email
+{
+  width:95%;
+  height:30px;
+  margin-top:1%
+}
+#button
+{
+  width: 96%;
+  margin-top: 2%;
+  height:30px;
+  border-radius: 3px;
+}
+
+/* Js Extend Things js */
+.error{
+  background-color: red;
+  font-size: 12px;
+  width:130px;
+  padding: 6px;
+  font-weight: bold;
+  border-radius: 3px;
+}
+.success{
+  background-color:greenyellow;
+  font-size: 12px;
+  width:130px;
+  padding: 6px;
+  font-weight: bold;
+  border-radius: 3px;
+}
+.details1
+{
+  background-color: #ccc;
+  font-weight: bold;
+  font-size: 15px;
+  width: 60%;
+  padding:5px;
+  color: rgb(212, 66, 66);
+}
+.details2
+{
+  background-color: #ccc;
+  font-weight: bold;
+  font-size: 15px;
+  width: 60%;
+  padding:5px;
+  color: rgb(212, 66, 66);
+}
+
+/* For Table */
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 60%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
