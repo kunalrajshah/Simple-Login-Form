@@ -16,7 +16,7 @@ function onsubmit(e)
   if(nameinput.value==='' || email.value==='')
   {
      msg.classList.add('error');                // Add class error in msg.
-     msg.innerHTML="Hey Taani can you please Enter User details";
+     msg.innerHTML="Hey can you please Enter User details";
 
      setTimeout(() => {                           // Remove the message with class after 1 sec.
       msg.classList.remove('error');
