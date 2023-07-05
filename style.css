@@ -37,6 +37,7 @@ div.box label {
   margin-top: 2%;
   height:30px;
   border-radius: 3px;
+  cursor: pointer;
 }
 
 /* Js Extend Things js */

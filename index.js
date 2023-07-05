@@ -18,23 +18,30 @@ function onSubmit(e) {
       errorMsg.innerHTML = "";
     }, 1000);
   } else {
-    var nam=nameInput.value;
+    var nam = nameInput.value;
+    var eml = emailInput.value;
     // Create table row and cells for user details
     const row = document.createElement("tr");
     const nameCell = document.createElement("td");
     const emailCell = document.createElement("td");
     const deleteCell = document.createElement("td");
+    const editCell = document.createElement("td");
     const deleteButton = document.createElement("button");
+    const editButton = document.createElement("button");
 
     nameCell.textContent = nameInput.value;
     emailCell.textContent = emailInput.value;
     deleteButton.textContent = "Delete";
+    editButton.textContent = "Edit";
     deleteButton.classList.add("del");
+    editButton.classList.add("del");
 
     deleteCell.appendChild(deleteButton);
+    editCell.appendChild(editButton);
     row.appendChild(nameCell);
     row.appendChild(emailCell);
     row.appendChild(deleteCell);
+    row.appendChild(editCell);
     userTable.appendChild(row);
 
     //For success message
@@ -54,6 +61,31 @@ function onSubmit(e) {
       row.remove(); // Remove the row from the table
       localStorage.removeItem(nam); // Remove the user details from localStorage
     });
+
+    // Add function on Edit Button
+    editButton.addEventListener('click',editdetails);
+
+    function editdetails()
+    {
+      var newtxtn=prompt('Enter new name',nam);
+      var newtxte=prompt('Enter new email',eml);
+      
+      if (newtxtn !== null && newtxtn !== "" && newtxte!==null) {
+        nameCell.textContent=newtxtn;
+        localStorage.removeItem(nam);
+        var obj={Name:newtxtn, Email: newtxte};
+        localStorage.setItem(newtxtn,JSON.stringify(obj));
+      }
+      if (newtxte !== null) {
+        emailCell.textContent=newtxte;
+      }
+
+      deleteButton.addEventListener('click',()=>{
+        localStorage.removeItem(newtxtn);
+    });
+    }
+
+
 
     // clear details on refreshing
     nameInput.value = "";
