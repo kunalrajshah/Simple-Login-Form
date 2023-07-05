@@ -56,24 +56,7 @@ div.box label {
   font-weight: bold;
   border-radius: 3px;
 }
-.details1
-{
-  background-color: #ccc;
-  font-weight: bold;
-  font-size: 15px;
-  width: 60%;
-  padding:5px;
-  color: rgb(212, 66, 66);
-}
-.details2
-{
-  background-color: #ccc;
-  font-weight: bold;
-  font-size: 15px;
-  width: 60%;
-  padding:5px;
-  color: rgb(212, 66, 66);
-}
+
 
 /* For Table */
 table {
@@ -86,4 +69,12 @@ td, th {
   border: 1px solid #dddddd;
   text-align: left;
   padding: 8px;
+}
+
+/* CSS on Delete Button */
+.del
+{
+  color: red;
+  background-color: #e2b1b1;
+  
 }

@@ -1,81 +1,62 @@
-const nameinput = document.querySelector("#name");
-const email = document.querySelector("#email");
+const nameInput = document.querySelector("#name");
+const emailInput = document.querySelector("#email");
 const btn = document.querySelector("#button");
-const msg = document.querySelector("#er");
-// const userlist=document.querySelector('#output');
-const nm = document.querySelector(".nm");
-const em = document.querySelector(".em");
+const errorMsg = document.querySelector("#er");
+const userTable = document.querySelector("#user-table");
 
-// Apply function on Button
+btn.addEventListener("click", onSubmit);
 
-btn.addEventListener("click", onsubmit);
-
-function onsubmit(e) {
+function onSubmit(e) {
   e.preventDefault();
-  if (nameinput.value === "" || email.value === "") {
-    msg.classList.add("error"); // Add class error in msg.
-    msg.innerHTML = "Hey can you please Enter User details";
 
+  if (nameInput.value === "" || emailInput.value === "") {
+    //For Delete Message
+    errorMsg.classList.add("error");
+    errorMsg.innerHTML = "Please enter user details.";
     setTimeout(() => {
-      // Remove the message with class after 1 sec.
-      msg.classList.remove("error");
-      msg.innerHTML = "";
+      errorMsg.classList.remove("error");
+      errorMsg.innerHTML = "";
     }, 1000);
   } else {
-    const li1 = document.createElement("p");
-    const li2 = document.createElement("p");
+    var nam=nameInput.value;
+    // Create table row and cells for user details
+    const row = document.createElement("tr");
+    const nameCell = document.createElement("td");
+    const emailCell = document.createElement("td");
+    const deleteCell = document.createElement("td");
+    const deleteButton = document.createElement("button");
 
-    // const adddetails=document.createTextNode(`Name is: ${nameinput.value} and Email is: ${email.value}`);
+    nameCell.textContent = nameInput.value;
+    emailCell.textContent = emailInput.value;
+    deleteButton.textContent = "Delete";
+    deleteButton.classList.add("del");
 
-    const adddetails1 = document.createTextNode(`${nameinput.value}`); // Take name value
-    const adddetails2 = document.createTextNode(`${email.value}`); // Take email value
-    li1.appendChild(adddetails1);
-    li2.appendChild(adddetails2);
+    deleteCell.appendChild(deleteButton);
+    row.appendChild(nameCell);
+    row.appendChild(emailCell);
+    row.appendChild(deleteCell);
+    userTable.appendChild(row);
 
-    // Adding Class in Element
-
-    li1.classList.add("details1");
-    li2.classList.add("details2");
-    nm.appendChild(li1);
-    em.appendChild(li2);
-
-    // Give Success message
-    msg.classList.add("success"); // Add class Success in msg.
-    msg.innerHTML = "Hey, you SuccessFully Added..";
-
+    //For success message
+    errorMsg.classList.add("success");
+    errorMsg.innerHTML = "User successfully added.";
     setTimeout(() => {
-      // Remove the message with class after 1 sec.
-      msg.classList.remove("success");
-      msg.innerHTML = "";
+      errorMsg.classList.remove("success");
+      errorMsg.innerHTML = "";
     }, 1000);
 
-    // Adding value into Local Storage when we click on Submit-> it set data for single user only
+    // Add user details to localStorage
+    const user = { Name: nameInput.value, Email: emailInput.value };
+    localStorage.setItem(nameInput.value, JSON.stringify(user));
 
-    /* var nameval = nameinput.value;
-    var emailval = email.value;
-    localStorage.setItem("Name:", nameval);
-    localStorage.setItem("Email:", emailval);*/
-
-    // Adding value as an object into Local Storage -> it add more than one user details
-    
-    var existuser=localStorage.getItem('UserDetails');  // take existing userdetails
-    var listofdetails=existuser ? JSON.parse(existuser) : [];
-    // This line checks if existuser is truthy, meaning it contains a non-empty string. If it is truthy, it indicates that there are existing user details stored in the local storage. In that case, JSON.parse(existuser) is used to convert the string back into an array of user details objects. The result is assigned to the listofdetails variable.If existuser is falsy, indicating there are no existing user details in the local storage (or it is null, undefined, or an empty string), an empty array [] is assigned to listofdetails.
-
-    var newobj={
-      Name:nameinput.value,
-      Email:email.value
-    };
-
-    listofdetails.push(newobj);  // push to the list
-
-    var newobj_serialize=JSON.stringify(listofdetails);
-    localStorage.setItem('UserDetails',newobj_serialize);
-    
+    // Add function on Delete Button.
+    deleteButton.addEventListener("click", () => {
+      row.remove(); // Remove the row from the table
+      localStorage.removeItem(nam); // Remove the user details from localStorage
+    });
 
     // clear details on refreshing
-    nameinput.value = "";
-    email.value = "";
+    nameInput.value = "";
+    emailInput.value = "";
   }
 }
-
