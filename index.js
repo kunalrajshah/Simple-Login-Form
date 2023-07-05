@@ -48,12 +48,31 @@ function onsubmit(e) {
       msg.classList.remove("success");
       msg.innerHTML = "";
     }, 1000);
-    // Adding value into Local Storage when we click on Submit
-    var nameval = nameinput.value;
+
+    // Adding value into Local Storage when we click on Submit-> it set data for single user only
+
+    /* var nameval = nameinput.value;
     var emailval = email.value;
     localStorage.setItem("Name:", nameval);
-    localStorage.setItem("Email:", emailval);
+    localStorage.setItem("Email:", emailval);*/
+
+    // Adding value as an object into Local Storage -> it add more than one user details
     
+    var existuser=localStorage.getItem('UserDetails');  // take existing userdetails
+    var listofdetails=existuser ? JSON.parse(existuser) : [];
+    // This line checks if existuser is truthy, meaning it contains a non-empty string. If it is truthy, it indicates that there are existing user details stored in the local storage. In that case, JSON.parse(existuser) is used to convert the string back into an array of user details objects. The result is assigned to the listofdetails variable.If existuser is falsy, indicating there are no existing user details in the local storage (or it is null, undefined, or an empty string), an empty array [] is assigned to listofdetails.
+
+    var newobj={
+      Name:nameinput.value,
+      Email:email.value
+    };
+
+    listofdetails.push(newobj);  // push to the list
+
+    var newobj_serialize=JSON.stringify(listofdetails);
+    localStorage.setItem('UserDetails',newobj_serialize);
+    
+
     // clear details on refreshing
     nameinput.value = "";
     email.value = "";
