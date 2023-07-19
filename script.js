@@ -53,42 +53,55 @@ function onSubmit(e) {
     }, 1000);
 
     // Add user details to localStorage
-    const user = { Name: nameInput.value, Email: emailInput.value };
-    localStorage.setItem(nameInput.value, JSON.stringify(user));
+    setdata();
 
     // Add function on Delete Button.
     deleteButton.addEventListener("click", () => {
       row.remove(); // Remove the row from the table
-      localStorage.removeItem(nam); // Remove the user details from localStorage
+      setdata();
     });
-
-    // Add function on Edit Button
-    editButton.addEventListener('click',editdetails);
-
-    function editdetails()
-    {
-      var newtxtn=prompt('Enter new name',nam);
-      var newtxte=prompt('Enter new email',eml);
-      
-      if (newtxtn !== null && newtxtn !== "" && newtxte!==null) {
-        nameCell.textContent=newtxtn;
-        localStorage.removeItem(nam);
-        var obj={Name:newtxtn, Email: newtxte};
-        localStorage.setItem(newtxtn,JSON.stringify(obj));
-      }
-      if (newtxte !== null) {
-        emailCell.textContent=newtxte;
-      }
-
-      deleteButton.addEventListener('click',()=>{
-        localStorage.removeItem(newtxtn);
-    });
-    }
-
-
 
     // clear details on refreshing
     nameInput.value = "";
     emailInput.value = "";
   }
 }
+
+//Adding data to localstorage so that task is even show after refreshing and window closed
+function setdata()
+{
+ localStorage.setItem('data',userTable.innerHTML);
+}
+
+//  Get data from localstorage
+function getdata()
+{
+ userTable.innerHTML=localStorage.getItem('data');
+}
+
+getdata();  // Calling to get data 
+
+// Add function on button after getting by local storage
+userTable.addEventListener("click",(event)=>{
+    if(event.target.classList.contains('del'))
+    {
+      const data=event.target.parentElement.parentElement;
+      if(event.target.textContent==='Delete')
+      {
+        data.remove();
+        setdata();
+      }
+      else if(event.target.textContent==='Edit')
+      {
+        var newnam=prompt('Enter new Name',data.children[0].textContent);
+        var newemail=prompt('Enter new Email',data.children[1].textContent);
+
+        if(newnam!=="" && newnam!== null)
+        data.children[0].textContent=newnam;
+        if(newemail!=="" && newemail!== null)
+        data.children[1].textContent=newemail;
+
+        setdata()
+      }
+    }
+})
